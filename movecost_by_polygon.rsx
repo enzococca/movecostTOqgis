@@ -23,7 +23,7 @@
 ##CB=number 0.6
 ##CLL=number 0.6
 ##Output=output folder
-
+##showplots
 
 
 library(sp)
