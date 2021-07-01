@@ -28,7 +28,7 @@
 ##Output_LCP=output vector
 ##Output_LCP_Back=output vector
 ##Output_W_Cost=output vector
-
+##showplots
 
 library(sp)
 library(movecost)
@@ -100,7 +100,7 @@ if(Cognitive_Slope==1)
 #if(DL==1)	
 #	DL=c(FALSE)			
 
-r<-movecost(dtm=NULL, origin=Origin, destin=Destination, studyplot=Area_of_interest,funct=Function, time=Time, outp=Outp, move=Move, breaks=Breaks,return.base=Return_Base, cogn.slp=Cognitive_Slope, sl.crit=Critical_Slope,W=Walker_Body_Weight,L=Carried_Load_Weight,N=N,V=Speed,z=Zoom_Level,rb.lty=RL,cont.lab=CL,destin.lab=DL,cex.breaks=CB,cex.lcp.lab=CLL, export=TRUE)
+r<-movecost(dtm=NULL, origin=Origin, destin=Destination, studyplot=Area_of_interest,funct=Function, time=Time, outp=Outp, move=Move, breaks=Breaks, return.base=TRUE, cogn.slp=Cognitive_Slope,  sl.crit=Critical_Slope,W=Walker_Body_Weight, L=Carried_Load_Weight,N=N, V=Speed, z=Zoom_Level, rb.lty=RL, cont.lab=TRUE, destin.lab=TRUE, cex.breaks=CB, cex.lcp.lab=CLL, oneplot=FALSE, export=FALSE)
 
 
 raster.sp <- as(r$accumulated.cost.raster, "SpatialPixelsDataFrame") 
