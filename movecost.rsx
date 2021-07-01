@@ -8,11 +8,11 @@
 ##Movecost=name
 ##Move=number 8
 ##Breaks=number 0.5
-##Function=selection t;tofp;mp;icmonp;icmoffp;icfonp;ug;alb;gkrs;r;ree;hrz;wcs;p;vl;ls;b;icfoffp
-##Time=selection h;m 
-##Outp=selection r;c 
-##Return_Base=selection TRUE;FALSE
-##Cognitive_Slope=selection TRUE;FALSE
+##Function=selection t;tofp;mp;icmonp;icmoffp;icfonp;ug;alb;gkrs;r;ree;hrz;wcs;p;vl;ls;b;icfoffp ;
+##Time=selection h;m ;
+##Outp=selection r;c ;
+##Return_Base=selection TRUE;FALSE ;
+##Cognitive_Slope=selection FALSE;TRUE ;
 ##Critical_Slope=number 1
 ##Walker_Body_Weight=number 70
 ##Carried_Load_Weight=number 0
@@ -20,8 +20,8 @@
 ##Speed=number 1
 ##Zoom_Level=number 9
 ##RL=number 2
-##CL=selection TRUE;FALSE
-##DL=selection TRUE;FALSE
+##CL=selection  TRUE;FALSE ;
+##DL=selection  TRUE;FALSE ;
 ##CB=number 0.6
 ##CLL=number 0.6
 ##Output=output folder
@@ -98,5 +98,4 @@ if(DL==0)
 	DL=c(TRUE)
 if(DL==1)	
 	DL=c(FALSE)		
-movecost(dtm=DTM, origin=Origin, destin=Destination, funct=Function, time=Time, outp=Outp, move=Move, breaks=Breaks,return.base=Return_Base, cogn.slp=Cognitive_Slope, sl.crit=Critical_Slope,W=Walker_Body_Weight,L=Carried_Load_Weight,N=N,V=Speed,z=Zoom_Level,rb.lty=RL,cont.lab=CL,destin.lab=DL,cex.breaks=CB,cex.lcp.lab=CLL, export=TRUE)
-
+result<-movecost(dtm=DTM, origin=Origin, destin=Destination, funct=Function, time=Time, outp=Outp, move=Move, breaks=Breaks,return.base=Return_Base, cogn.slp=Cognitive_Slope, sl.crit=Critical_Slope,W=Walker_Body_Weight,L=Carried_Load_Weight,N=N,V=Speed,z=Zoom_Level,rb.lty=RL,cont.lab=CL,destin.lab=DL,cex.breaks=CB,cex.lcp.lab=CLL, export=TRUE)
