@@ -6,16 +6,16 @@
 ##Origin=vector point
 ##Destination=vector point
 ##Movecost=name
-##Move=number 8
+##Move=number 16
 ##Breaks=number 0.5
 ##Function=selection t;tofp;mp;icmonp;icmoffp;icfonp;ug;alb;gkrs;r;ree;hrz;wcs;p;vl;ls;b;icfoffp ;
 ##Time=selection h;m ;
 ##Outp=selection r;c ;
 ##Return_Base=selection TRUE;FALSE ;
 ##Cognitive_Slope=selection FALSE;TRUE ;
-##Critical_Slope=number 1
+##Critical_Slope=number 10
 ##Walker_Body_Weight=number 70
-##Carried_Load_Weight=number 0
+##Carried_Load_Weight=number 1
 ##N=number 1
 ##Speed=number 1
 ##Zoom_Level=number 9
@@ -24,19 +24,17 @@
 ##DL=selection  TRUE;FALSE ;
 ##CB=number 0.6
 ##CLL=number 0.6
-##Output=output folder
+##Output_Accum_Cost_Surface=output raster
 ##Output_Isoline=output vector
 ##Output_LCP=output vector
-##Output_Isoline=output vector
-##Output_Cost_Surface=output raster
-##Output_Accum_Cost_Surface=output raster
-##showplots
-setwd(Output)
+##Output_LCP_Back=output vector
+##Output_W_Cost=output vector
 
-library(tcltk)
+
+##showplots
+
 library(sp)
 library(movecost)
-library(GmAMisc)
 library(raster)
 library(rgdal)
 DTM<-raster(DTM)
@@ -91,35 +89,33 @@ if(Return_Base==1)
 	Return_Base=c(FALSE)
 	
 if(Cognitive_Slope==0)	
-	Cognitive_Slopee=c(TRUE)
+	Cognitive_Slopee=c(FALSE)
 if(Cognitive_Slope==1)	
-	Cognitive_Slope=c(FALSE)	
+	Cognitive_Slope=c(TRUE)	
 
-if(CL==0)	
-	CL=c(TRUE)
-if(CL==1)	
-	CL=c(FALSE)	
+#if(CL==0)	
+#	CL=c(TRUE)
+#if(CL==1)	
+#	CL=c(FALSE)	
 
-if(DL==0)	
-	DL=c(TRUE)
-if(DL==1)	
-	DL=c(FALSE)		
-result<-movecost(dtm=DTM, origin=Origin, destin=Destination, funct=Function, time=Time, outp=Outp, move=Move, breaks=Breaks,return.base=Return_Base, cogn.slp=Cognitive_Slope, sl.crit=Critical_Slope,W=Walker_Body_Weight,L=Carried_Load_Weight,N=N,V=Speed,z=Zoom_Level,rb.lty=RL,cont.lab=CL,destin.lab=DL,cex.breaks=CB,cex.lcp.lab=CLL, export=TRUE)
+#if(DL==0)	
+#	DL=c(TRUE)
+#if(DL==1)	
+#	DL=c(FALSE)		
+	
+r<-movecost(dtm=DTM, origin=Origin, destin=Destination, funct=Function, time=Time, outp=Outp, move=Move, breaks=Breaks, return.base=TRUE, cogn.slp=TRUE, sl.crit=Critical_Slope, W=Walker_Body_Weight, L=Carried_Load_Weight, N=N, V=Speed, z=Zoom_Level, rb.lty=RL, cont.lab=TRUE, destin.lab=TRUE, cex.breaks=CB, cex.lcp.lab=CLL, oneplot=FALSE, export=FALSE)
 
-msgBox <- tkmessageBox(title = "Import Vector",
-                       message = "Import vector isolines .shp!", icon = "info", type = "ok")
-Output_Isoline=impShp()
-msgBox2 <- tkmessageBox(title = "Import Vector",
-                       message = "Import vector LCPs .shp!", icon = "info", type = "ok")
-Output_LCP=impShp()
-msgBox3 <- tkmessageBox(title = "Import Raster",
-                       message = "Import raster cost surface!", icon = "info", type = "ok")
-raster1<-impRst()
-raster1.sp <- as(raster1, "SpatialPixelsDataFrame") # Converting the RasterLayer object to a SpatialPixelsDataFrame object
-Output_Cost_Surface=raster1.sp
-msgBox4 <- tkmessageBox(title = "Import Raster",
-                       message = "Import raster accum cost surface !", icon = "info", type = "ok")
+raster.sp <- as(r$accumulated.cost.raster, "SpatialPixelsDataFrame") 
+Output_Accum_Cost_Surface=raster.sp
 
-raster2<-impRst()
-raster2.sp <- as(raster2, "SpatialPixelsDataFrame") # Converting the RasterLayer object to a SpatialPixelsDataFrame object
-Output_Accum_Cost_Surface=raster2.sp
+a1.sp<-as(r$isolines, "SpatialLinesDataFrame")
+Output_Isoline=a1.sp
+
+b1.sp<-as(r$LCPs, "SpatialLinesDataFrame")
+Output_LCP=b1.sp
+
+lback.sp<-as(r$LCPs.back, "SpatialLinesDataFrame")
+Output_LCP_Back=lback.sp
+
+dd.sp<-as(r$dest.loc.w.cost, "SpatialPointsDataFrame")
+Output_W_Cost=dd.sp
