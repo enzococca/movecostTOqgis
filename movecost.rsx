@@ -25,12 +25,18 @@
 ##CB=number 0.6
 ##CLL=number 0.6
 ##Output=output folder
+##Output_Isoline=output vector
+##Output_LCP=output vector
+##Output_Isoline=output vector
+##Output_Cost_Surface=output raster
+##Output_Accum_Cost_Surface=output raster
 ##showplots
 setwd(Output)
 
-
+library(tcltk)
 library(sp)
 library(movecost)
+library(GmAMisc)
 library(raster)
 library(rgdal)
 DTM<-raster(DTM)
@@ -99,3 +105,21 @@ if(DL==0)
 if(DL==1)	
 	DL=c(FALSE)		
 result<-movecost(dtm=DTM, origin=Origin, destin=Destination, funct=Function, time=Time, outp=Outp, move=Move, breaks=Breaks,return.base=Return_Base, cogn.slp=Cognitive_Slope, sl.crit=Critical_Slope,W=Walker_Body_Weight,L=Carried_Load_Weight,N=N,V=Speed,z=Zoom_Level,rb.lty=RL,cont.lab=CL,destin.lab=DL,cex.breaks=CB,cex.lcp.lab=CLL, export=TRUE)
+
+msgBox <- tkmessageBox(title = "Import Vector",
+                       message = "Import vector isolines .shp!", icon = "info", type = "ok")
+Output_Isoline=impShp()
+msgBox2 <- tkmessageBox(title = "Import Vector",
+                       message = "Import vector LCPs .shp!", icon = "info", type = "ok")
+Output_LCP=impShp()
+msgBox3 <- tkmessageBox(title = "Import Raster",
+                       message = "Import raster cost surface!", icon = "info", type = "ok")
+raster1<-impRst()
+raster1.sp <- as(raster1, "SpatialPixelsDataFrame") # Converting the RasterLayer object to a SpatialPixelsDataFrame object
+Output_Cost_Surface=raster1.sp
+msgBox4 <- tkmessageBox(title = "Import Raster",
+                       message = "Import raster accum cost surface !", icon = "info", type = "ok")
+
+raster2<-impRst()
+raster2.sp <- as(raster2, "SpatialPixelsDataFrame") # Converting the RasterLayer object to a SpatialPixelsDataFrame object
+Output_Accum_Cost_Surface=raster2.sp
