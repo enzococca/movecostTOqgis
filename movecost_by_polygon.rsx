@@ -1,4 +1,5 @@
 ##load_vector_using_rgdal
+##load_raster_using_rgdal
 ##movecost script=group
 ##Area_of_interest=vector polygon
 ##Origin=vector point
@@ -7,8 +8,8 @@
 ##Move=number 8
 ##Breaks=number 0.5
 ##Function=selection t;tofp;mp;icmonp;icmoffp;icfonp;ug;alb;gkrs;r;ree;hrz;wcs;p;vl;ls;b;icfoffp ;
-##Time=selection h;m 
-##Outp=selection r;c 
+##Time=selection h;m ;
+##Outp=selection r;c ;
 ##Return_Base=selection TRUE;FALSE ;
 ##Cognitive_Slope=selection FALSE;TRUE ;
 ##Critical_Slope=number 1
@@ -30,6 +31,7 @@
 ##Output_Accum_Cost_Surface=output raster
 ##showplots
 
+setwd(Output)
 
 library(tcltk)
 library(sp)
