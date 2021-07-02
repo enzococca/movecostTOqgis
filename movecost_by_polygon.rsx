@@ -23,6 +23,7 @@
 ##DL=selection TRUE;FALSE ;
 ##CB=number 0.6
 ##CLL=number 0.6
+##Output_DTM=output raster
 ##Output_Accum_Cost_Surface=output raster
 ##Output_Isoline=output vector
 ##Output_LCP=output vector
@@ -102,6 +103,8 @@ if(Cognitive_Slope==1)
 
 r<-movecost(dtm=NULL, origin=Origin, destin=Destination, studyplot=Area_of_interest,funct=Function, time=Time, outp=Outp, move=Move, breaks=Breaks, return.base=TRUE, cogn.slp=Cognitive_Slope,  sl.crit=Critical_Slope,W=Walker_Body_Weight, L=Carried_Load_Weight,N=N, V=Speed, z=Zoom_Level, rb.lty=RL, cont.lab=TRUE, destin.lab=TRUE, cex.breaks=CB, cex.lcp.lab=CLL, oneplot=FALSE, export=FALSE)
 
+raster2.sp <- as(r$dtm, "SpatialPixelsDataFrame") 
+Output_DTM=raster2.sp
 
 raster.sp <- as(r$accumulated.cost.raster, "SpatialPixelsDataFrame") 
 Output_Accum_Cost_Surface=raster.sp
