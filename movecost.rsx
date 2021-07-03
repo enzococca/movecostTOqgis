@@ -11,17 +11,17 @@
 ##Function=selection t;tofp;mp;icmonp;icmoffp;icfonp;ug;alb;gkrs;r;ree;hrz;wcs;p;vl;ls;b;icfoffp ;
 ##Time=selection h;m ;
 ##Outp=selection r;c ;
-##Return_Base=selection TRUE;FALSE ;
-##Cognitive_Slope=selection FALSE;TRUE ;
+##Return_Base=string TRUE
+##Cognitive_Slope=string TRUE
 ##Critical_Slope=number 10
 ##Walker_Body_Weight=number 70
-##Carried_Load_Weight=number 1
+##Carried_Load_Weight=number 0
 ##N=number 1
 ##Speed=number 1
 ##Zoom_Level=number 9
 ##RL=number 2
-##CL=selection  TRUE;FALSE ;
-##DL=selection  TRUE;FALSE ;
+##CL=string TRUE
+##DL=string TRUE
 ##CB=number 0.6
 ##CLL=number 0.6
 ##Output_Accum_Cost_Surface=output raster
@@ -83,27 +83,12 @@ if(Outp==0)
 if(Outp==1)
 	Outp=c("c")
 	
-if(Return_Base==0)	
-	Return_Base=c(TRUE)
-if(Return_Base==1)	
-	Return_Base=c(FALSE)
+Return_Base<-noquote(Return_Base)	
+Cognitive_Slope<-noquote(Cognitive_Slope)
+DL<-noquote(DL)	
+CL<-noquote(CL)
 	
-if(Cognitive_Slope==0)	
-	Cognitive_Slopee=c(FALSE)
-if(Cognitive_Slope==1)	
-	Cognitive_Slope=c(TRUE)	
-
-#if(CL==0)	
-#	CL=c(TRUE)
-#if(CL==1)	
-#	CL=c(FALSE)	
-
-#if(DL==0)	
-#	DL=c(TRUE)
-#if(DL==1)	
-#	DL=c(FALSE)		
-	
-r<-movecost(dtm=DTM, origin=Origin, destin=Destination, funct=Function, time=Time, outp=Outp, move=Move, breaks=Breaks, return.base=TRUE, cogn.slp=TRUE, sl.crit=Critical_Slope, W=Walker_Body_Weight, L=Carried_Load_Weight, N=N, V=Speed, z=Zoom_Level, rb.lty=RL, cont.lab=TRUE, destin.lab=TRUE, cex.breaks=CB, cex.lcp.lab=CLL, oneplot=FALSE, export=FALSE)
+r<-movecost(dtm=DTM, origin=Origin, destin=Destination, funct=Function, time=Time, outp=Outp, move=Move, breaks=Breaks, return.base=Return_Base, cogn.slp=Cognitive_Slope, sl.crit=Critical_Slope, W=Walker_Body_Weight, L=Carried_Load_Weight, N=N, V=Speed, z=Zoom_Level, rb.lty=RL, cont.lab=CL, destin.lab=DL, cex.breaks=CB, cex.lcp.lab=CLL, oneplot=FALSE, export=FALSE)
 
 raster.sp <- as(r$accumulated.cost.raster, "SpatialPixelsDataFrame") 
 Output_Accum_Cost_Surface=raster.sp
@@ -114,8 +99,8 @@ Output_Isoline=a1.sp
 b1.sp<-as(r$LCPs, "SpatialLinesDataFrame")
 Output_LCP=b1.sp
 
-lback.sp<-as(r$LCPs.back, "SpatialLinesDataFrame")
-Output_LCP_Back=lback.sp
+if(Return_Base==TRUE){lback.sp<-as(r$LCPs.back, "SpatialLinesDataFrame")	
+Output_LCP_Back=lback.sp}
 
-dd.sp<-as(r$dest.loc.w.cost, "SpatialPointsDataFrame")
-Output_W_Cost=dd.sp
+if(DL==TRUE){dd.sp<-as(r$dest.loc.w.cost, "SpatialPointsDataFrame")
+Output_W_Cost=dd.sp}
