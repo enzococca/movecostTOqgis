@@ -1,4 +1,3 @@
-
 ##load_vector_using_rgdal
 ##load_raster_using_rgdal
 ##movecost script=group
