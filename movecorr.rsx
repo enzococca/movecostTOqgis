@@ -1,7 +1,7 @@
 ##load_vector_using_rgdal
 ##load_raster_using_rgdal
 ##movecost script=group
-##Movecorr_by_polygon=name
+##Movecorr=name
 ##DTM=raster
 ##Points=vector point
 ##Selection_ID_Point_A=number 1
