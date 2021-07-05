@@ -72,7 +72,9 @@ Cognitive_Slope<-noquote(Cognitive_Slope)
 r<-movebound(dtm=NULL, origin=Points, studyplot=Area_of_interest,funct=Function, time=Time, move=Move, cont.value=Cost_Value, cogn.slp=Cognitive_Slope,  sl.crit=Critical_Slope,W=Walker_Body_Weight, L=Carried_Load_Weight,N=N, V=Speed, z=Zoom_Level, cont.lab=TRUE, export=FALSE)
 
 raster2.sp <- as(r$dtm, "SpatialPixelsDataFrame") 
-Output_DTM=raster2.sp
+lidar_chm_crop <- crop(raster2.sp, Area_of_interest)
+
+Output_DTM=lidar_chm_crop
 
 a1.sp<-as(r$isolines, "SpatialLinesDataFrame")
 Output_Isoline=a1.sp

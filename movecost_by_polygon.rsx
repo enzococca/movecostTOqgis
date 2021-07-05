@@ -91,10 +91,12 @@ CL<-noquote(CL)
 r<-movecost(dtm=NULL, origin=Origin, destin=Destination, studyplot=Area_of_interest,funct=Function, time=Time, outp=Outp, move=Move, breaks=Breaks, return.base=Return_Base, cogn.slp=Cognitive_Slope,  sl.crit=Critical_Slope,W=Walker_Body_Weight, L=Carried_Load_Weight,N=N, V=Speed, z=Zoom_Level, rb.lty=RL, cont.lab=CL, destin.lab=DL, cex.breaks=CB, cex.lcp.lab=CLL, oneplot=FALSE, export=FALSE)
 
 raster2.sp <- as(r$dtm, "SpatialPixelsDataFrame") 
-Output_DTM=raster2.sp
+ras2 <- crop(raster2.sp, Area_of_interest)
+Output_DTM=ras2
 
 raster.sp <- as(r$accumulated.cost.raster, "SpatialPixelsDataFrame") 
-Output_Accum_Cost_Surface=raster.sp
+ras <- crop(raster.sp, Area_of_interest)
+Output_Accum_Cost_Surface=ras
 
 a1.sp<-as(r$isolines, "SpatialLinesDataFrame")
 Output_Isoline=a1.sp

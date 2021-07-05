@@ -82,16 +82,21 @@ Cognitive_Slope<-noquote(Cognitive_Slope)
 r<-movecorr(a=Points[Selection_ID_Point_A,],b=Points[Selection_ID_Point_B,],funct=Function,time=Time,move=Move,studyplot=Area_of_interest,cogn.slp=Cognitive_Slope,sl.crit=Critical_Slope,W=Walker_Body_Weight,L=Carried_Load_Weight,N=N,V=Speed,z=Zoom_Level)
 
 DTM.sp<- as(r$dtm, "SpatialPixelsDataFrame") 
-Output_DTM=DTM.sp
+dtm_ <- crop(DTM.sp, Area_of_interest)
 
-LC.sp<- as(r$lc.corridor, "SpatialPixelsDataFrame") 
-Output_LC_corridor=LC.sp
+Output_DTM=dtm_
+
+LC.sp<- as(r$lc.corridor, "SpatialPixelsDataFrame")
+lc <- crop(LC.sp, Area_of_interest) 
+Output_LC_corridor=lc
 
 raster.sp <- as(r$accum_cost_surf_a, "SpatialPixelsDataFrame") 
-Output_Accum_Cost_Surface_A=raster.sp
+ras <- crop(raster.sp, Area_of_interest)
+Output_Accum_Cost_Surface_A=ras
 
 raster2.sp <- as(r$accum_cost_surf_b, "SpatialPixelsDataFrame") 
-Output_Accum_Cost_Surface_B=raster2.sp
+ras2 <- crop(raster2.sp, Area_of_interest)
+Output_Accum_Cost_Surface_B=ras2
 
 a1.sp<-as(r$lcp_a_to_b, "SpatialLinesDataFrame")
 Output_LCP_A_to_B=a1.sp
