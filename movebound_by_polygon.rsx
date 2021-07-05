@@ -18,7 +18,7 @@
 ##Output_DTM=output raster
 ##Output_Isoline=output vector
 ##showplots
-
+install.packages("movecost")
 library(sp)
 library(movecost)
 

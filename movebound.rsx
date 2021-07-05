@@ -17,6 +17,9 @@
 ##Zoom_Level=number 9
 ##Output_Isoline=output vector
 ##showplots
+install.packages("movecost")
+
+
 
 library(sp)
 library(movecost)

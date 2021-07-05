@@ -27,7 +27,7 @@
 
 
 ##showplots
-
+install.packages("movecost")
 library(sp)
 library(movecost)
 library(raster)

@@ -30,7 +30,7 @@
 ##Output_LCP_Back=output vector
 ##Output_W_Cost=output vector
 ##showplots
-
+install.packages("movecost")
 library(sp)
 library(movecost)
 
