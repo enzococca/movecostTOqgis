@@ -3,7 +3,7 @@
 ##movecost script=group
 ##DTM=raster
 ##Points=vector point
-##Movebound_by_Polygon=name
+##Movebound=name
 ##Move=number 16
 ##Cost_Value=number 1
 ##Function=selection t;tofp;mp;icmonp;icmoffp;icfonp;ug;alb;gkrs;r;ree;hrz;wcs;p;vl;ls;b;icfoffp ;
