@@ -7,7 +7,7 @@
 ##Selection_ID_Point_A=number 1
 ##Selection_ID_Point_B=number 2
 ##Move=number 16
-##Function=selection t;tofp;mp;icmonp;icmoffp;icfonp;ug;alb;gkrs;r;ree;hrz;wcs;p;vl;ls;b;icfoffp ;
+##Function=selection t;tofp;mp;icmonp;icmoffp;icfonp;ug;alb;gkrs;r;ree;hrz;wcs;p;vl;ls;b;icfoffp;ks ;
 ##Time=selection h;m ;
 ##Cognitive_Slope=string TRUE
 ##Critical_Slope=number 10
@@ -69,6 +69,8 @@ if(Function==16)
 	Function=c("b")
 if(Function==17)
 	Function=c("icfoffp")
+if(Function==18)
+	Function=c("ks")	
 if(Time==0)
 	Time=c("h")
 if(Time==1)
