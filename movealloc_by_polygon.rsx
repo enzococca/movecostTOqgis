@@ -75,7 +75,7 @@ lidar_chm_crop <- crop(raster2.sp, Area_of_interest)
 Output_DTM=lidar_chm_crop
 raster.sp <- as(r$cost.allocation.raster, "SpatialPixelsDataFrame") 
 lidar_chm_crop2 <- crop(raster.sp, Area_of_interest)
-Output_AllocRaster=lidar_chm_crop2
+Output_Alloc_Raster=raster.sp
 a1.sp<-as(r$isolines, "SpatialLinesDataFrame")
 Output_Isoline=a1.sp
 a2.sp<-as(r$alloc.boundaries, "SpatialPolygonsDataFrame")
