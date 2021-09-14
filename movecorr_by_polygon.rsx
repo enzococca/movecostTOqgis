@@ -1,13 +1,13 @@
 ##load_vector_using_rgdal
 ##load_raster_using_rgdal
 ##movecost script=group
-##Movecorr_by_polygon=name
+##Movecorr by Polygon=name
 ##Area_of_interest=vector polygon
 ##Points=vector point
 ##Selection_ID_Point_A=number 1
 ##Selection_ID_Point_B=number 2
 ##Move=number 16
-##Function=selection t;tofp;mp;icmonp;icmoffp;icfonp;ug;alb;gkrs;r;ree;hrz;wcs;p;vl;ls;b;icfoffp;ks ;
+##Function=selection t;tofp;mp;icmonp;icmoffp;icfonp;icfoffp;ug;ma;alb;gkrs;r;ks;wcs;ree;b;p;pcf;m;hrz;vl;ls;a ;
 ##Time=selection h;m ;
 ##Cognitive_Slope=string TRUE
 ##Critical_Slope=number 10

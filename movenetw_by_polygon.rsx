@@ -1,16 +1,11 @@
 ##load_vector_using_rgdal
 ##load_raster_using_rgdal
 ##movecost script=group
-##DTM=raster
+##Movenetw by Polygon=name
+##Area_of_interest=vector polygon
 ##Origin=vector point
-##Destination=vector point
-##Movecost=name
 ##Move=number 16
-##Breaks=number 0.5
 ##Function=selection t;tofp;mp;icmonp;icmoffp;icfonp;icfoffp;ug;ma;alb;gkrs;r;ks;wcs;ree;b;p;pcf;m;hrz;vl;ls;a ;
-##Time=selection h;m ;
-##Outp=selection r;c ;
-##Return_Base=string TRUE
 ##Cognitive_Slope=string TRUE
 ##Critical_Slope=number 10
 ##Walker_Body_Weight=number 70
@@ -18,16 +13,14 @@
 ##N=number 1
 ##Speed=number 1
 ##Zoom_Level=number 9
-##RL=number 2
-##CL=string TRUE
-##DL=string TRUE
-##CB=number 0.6
-##CLL=number 0.6
-##Output_Accum_Cost_Surface=output raster
-##Output_Isoline=output vector
-##Output_LCP=output vector
-##Output_LCP_Back=output vector
-##Output_W_Cost=output vector
+##LCP_DENS=string FALSE
+
+##Output_LCPs_netw_merged=output vector
+##Output_DTM=output raster
+#Output_LCPs_density_count=output raster
+##Output_LCPs_density_perc=output raster
+#Output_LCPs_netw=output vector
+
 
 
 ##showplots
@@ -36,7 +29,6 @@ library(sp)
 library(movecost)
 library(raster)
 library(rgdal)
-DTM<-raster(DTM)
 if(Function==0)
 	Function=c("t")
 if(Function==1)
@@ -84,34 +76,29 @@ if(Function==21)
 if(Function==22)
 	Function=c("ls")	
 if(Function==23)
-	Function=c("a")		
-if(Time==0)
-	Time=c("h")
-if(Time==1)
-	Time=c("m")
-if(Outp==0)
-	Outp=c("r")
-if(Outp==1)
-	Outp=c("c")
-	
-Return_Base<-noquote(Return_Base)	
+	Function=c("a")	
+
+
 Cognitive_Slope<-noquote(Cognitive_Slope)
-DL<-noquote(DL)	
-CL<-noquote(CL)
-	
-r<-movecost(dtm=DTM, origin=Origin, destin=Destination, funct=Function, time=Time, outp=Outp, move=Move, breaks=Breaks, return.base=Return_Base, cogn.slp=Cognitive_Slope, sl.crit=Critical_Slope, W=Walker_Body_Weight, L=Carried_Load_Weight, N=N, V=Speed, z=Zoom_Level, rb.lty=RL, cont.lab=CL, destin.lab=DL, cex.breaks=CB, cex.lcp.lab=CLL, oneplot=FALSE, export=FALSE)
 
-raster.sp <- as(r$accumulated.cost.raster, "SpatialPixelsDataFrame") 
-Output_Accum_Cost_Surface=raster.sp
+r<-movenetw(studyplot=Area_of_interest, origin=Origin, funct=Function, move=Move, cogn.slp=Cognitive_Slope, sl.crit=Critical_Slope, W=Walker_Body_Weight, L=Carried_Load_Weight, N=N, V=Speed, z=Zoom_Level, lcp.dens=LCP_DENS, oneplot=FALSE, export=FALSE)
 
-a1.sp<-as(r$isolines, "SpatialLinesDataFrame")
-Output_Isoline=a1.sp
 
-b1.sp<-as(r$LCPs, "SpatialLinesDataFrame")
-Output_LCP=b1.sp
 
-if(Return_Base==TRUE){lback.sp<-as(r$LCPs.back, "SpatialLinesDataFrame")	
-Output_LCP_Back=lback.sp}
+b1.sp<-as(r$LCPs.netw.merged, "SpatialLinesDataFrame")
+Output_LCPs_netw_merged=b1.sp
 
-if(DL==TRUE){dd.sp<-as(r$dest.loc.w.cost, "SpatialPointsDataFrame")
-Output_W_Cost=dd.sp}
+
+dtm.sp <- as(r$dtm, "SpatialPixelsDataFrame") 
+Output_DTM=dtm.sp
+
+
+
+
+
+#a1.sp<-as(r$LCPs.netw, "SpatialLinesDataFrame")
+#Output_LCPs_netw=a1.sp
+#raster.sp <- as(r$LCPs.density.count, "SpatialPixelsDataFrame") 
+#Output_LCPs_density_count=raster.sp
+raster2.sp <- as(r$LCPs.density.perc, "SpatialPixelsDataFrame") 
+Output_LCPs_density_perc=raster2.sp

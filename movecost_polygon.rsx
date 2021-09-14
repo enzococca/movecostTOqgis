@@ -1,11 +1,11 @@
 ##load_vector_using_rgdal
 ##load_raster_using_rgdal
 ##movecost script=group
-##DTM=raster
+##Area_of_interest=vector polygon
 ##Origin=vector point
-##Destination=vector point
-##Movecost=name
-##Move=number 16
+##Destination=vector point 
+##Movecost_by_Polygon=name
+##Move=number 8
 ##Breaks=number 0.5
 ##Function=selection t;tofp;mp;icmonp;icmoffp;icfonp;icfoffp;ug;ma;alb;gkrs;r;ks;wcs;ree;b;p;pcf;m;hrz;vl;ls;a ;
 ##Time=selection h;m ;
@@ -23,20 +23,19 @@
 ##DL=string TRUE
 ##CB=number 0.6
 ##CLL=number 0.6
+##Output_DTM=output raster
 ##Output_Accum_Cost_Surface=output raster
 ##Output_Isoline=output vector
 ##Output_LCP=output vector
 ##Output_LCP_Back=output vector
 ##Output_W_Cost=output vector
-
-
 ##showplots
 install.packages("movecost")
 library(sp)
 library(movecost)
+
 library(raster)
 library(rgdal)
-DTM<-raster(DTM)
 if(Function==0)
 	Function=c("t")
 if(Function==1)
@@ -93,16 +92,23 @@ if(Outp==0)
 	Outp=c("r")
 if(Outp==1)
 	Outp=c("c")
-	
+
+
 Return_Base<-noquote(Return_Base)	
 Cognitive_Slope<-noquote(Cognitive_Slope)
 DL<-noquote(DL)	
 CL<-noquote(CL)
-	
-r<-movecost(dtm=DTM, origin=Origin, destin=Destination, funct=Function, time=Time, outp=Outp, move=Move, breaks=Breaks, return.base=Return_Base, cogn.slp=Cognitive_Slope, sl.crit=Critical_Slope, W=Walker_Body_Weight, L=Carried_Load_Weight, N=N, V=Speed, z=Zoom_Level, rb.lty=RL, cont.lab=CL, destin.lab=DL, cex.breaks=CB, cex.lcp.lab=CLL, oneplot=FALSE, export=FALSE)
+
+
+r<-movecost(dtm=NULL, origin=Origin, destin=Destination, studyplot=Area_of_interest,funct=Function, time=Time, outp=Outp, move=Move, breaks=Breaks, return.base=Return_Base, cogn.slp=Cognitive_Slope,  sl.crit=Critical_Slope,W=Walker_Body_Weight, L=Carried_Load_Weight,N=N, V=Speed, z=Zoom_Level, rb.lty=RL, cont.lab=CL, destin.lab=DL, cex.breaks=CB, cex.lcp.lab=CLL, oneplot=FALSE, export=FALSE)
+
+raster2.sp <- as(r$dtm, "SpatialPixelsDataFrame") 
+ras2 <- crop(raster2.sp, Area_of_interest)
+Output_DTM=ras2
 
 raster.sp <- as(r$accumulated.cost.raster, "SpatialPixelsDataFrame") 
-Output_Accum_Cost_Surface=raster.sp
+ras <- crop(raster.sp, Area_of_interest)
+Output_Accum_Cost_Surface=ras
 
 a1.sp<-as(r$isolines, "SpatialLinesDataFrame")
 Output_Isoline=a1.sp

@@ -3,10 +3,10 @@
 ##movecost script=group
 ##Area_of_interest=vector polygon
 ##Points=vector point
-##Movebound_by_Polygon=name
+##Movebound by Polygon=name
 ##Move=number 16
 ##Cost_Value=number 1
-##Function=selection t;tofp;mp;icmonp;icmoffp;icfonp;ug;alb;gkrs;r;ree;hrz;wcs;p;vl;ls;b;icfoffp ;
+##Function=selection t;tofp;mp;icmonp;icmoffp;icfonp;icfoffp;ug;ma;alb;gkrs;r;ks;wcs;ree;b;p;pcf;m;hrz;vl;ls;a ;
 ##Time=selection h;m ;
 ##Cognitive_Slope=string TRUE
 ##Critical_Slope=number 10
@@ -37,29 +37,41 @@ if(Function==4)
 if(Function==5)
 	Function=c("icfonp")
 if(Function==6)
-	Function=c("ug")
+	Function=c("icfoffp")
 if(Function==7)
-	Function=c("alb")
+	Function=c("ug")
 if(Function==8)
-	Function=c("gkrs")
+	Function=c("ma")
 if(Function==9)
-	Function=c("r")
+	Function=c("alb")
 if(Function==10)
-	Function=c("ree")
+	Function=c("gkrs")
 if(Function==11)
-	Function=c("hrz")
+	Function=c("r")
 if(Function==12)
-	Function=c("wcs")
+	Function=c("ks")
 if(Function==13)
-	Function=c("p")
+	Function=c("wcs")
 if(Function==14)
-	Function=c("vl")
+	Function=c("ree")
 if(Function==15)
-	Function=c("ls")
+	Function=c("b")
 if(Function==16)
 	Function=c("b")
 if(Function==17)
-	Function=c("icfoffp")
+	Function=c("p")
+if(Function==18)
+	Function=c("pcf")	
+if(Function==19)
+	Function=c("m")		
+if(Function==20)
+	Function=c("hrz")	
+if(Function==21)
+	Function=c("vl")	
+if(Function==22)
+	Function=c("ls")	
+if(Function==23)
+	Function=c("a")		
 if(Time==0)
 	Time=c("h")
 if(Time==1)
