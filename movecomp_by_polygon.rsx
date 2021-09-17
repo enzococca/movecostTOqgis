@@ -184,10 +184,12 @@ Cognitive_Slope<-noquote(Cognitive_Slope)
 
 
 	
-if(Choice3==0)
+tryCatch({
 r<-movecomp(origin=Origin, destin=Destination, choice=c(Choice1,Choice2), studyplot=Area_of_interest, move=Move, return.base=Return_Base, cogn.slp=Cognitive_Slope, sl.crit=Critical_Slope, W=Walker_Body_Weight, L=Carried_Load_Weight, N=N, V=Speed, z=Zoom_Level, oneplot=FALSE, export=FALSE)
-if(Choice3!=0)
-r<-movecomp(origin=Origin, destin=Destination, choice=c(Choice1,Choice2,Choice3),studyplot=Area_of_interest,  move=Move, return.base=Return_Base, cogn.slp=Cognitive_Slope, sl.crit=Critical_Slope, W=Walker_Body_Weight, L=Carried_Load_Weight, N=N, V=Speed, z=Zoom_Level, oneplot=FALSE, export=FALSE)
+},
+    error = function(e) {str(e) 
+r<-movecomp(origin=Origin, destin=Destination, choice=c(Choice1,Choice2,Choice3),studyplot=Area_of_interest,  move=Move, return.base=Return_Base, cogn.slp=Cognitive_Slope, sl.crit=Critical_Slope, W=Walker_Body_Weight, L=Carried_Load_Weight, N=N, V=Speed, z=Zoom_Level, oneplot=FALSE, export=FALSE)})
+
 
 b1.sp<-as(r$LCPs, "SpatialLinesDataFrame")
 Output_LCP=b1.sp
@@ -201,5 +203,3 @@ Output_DTM=ras2
 
 if(Return_Base==TRUE){lback.sp<-as(r$LPCs.back, "SpatialLinesDataFrame")	
 Output_LCP_Back=lback.sp}
-
-

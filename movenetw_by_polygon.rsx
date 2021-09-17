@@ -13,13 +13,13 @@
 ##N=number 1
 ##Speed=number 1
 ##Zoom_Level=number 9
-##LCP_DENS=string FALSE
+##LCP_DENS=string TRUE
 
 ##Output_LCPs_netw_merged=output vector
 ##Output_DTM=output raster
-#Output_LCPs_density_count=output raster
+##Output_LCPs_density_count=output raster
 ##Output_LCPs_density_perc=output raster
-#Output_LCPs_netw=output vector
+##Output_LCPs_netw=output vector
 
 
 
@@ -80,8 +80,8 @@ if(Function==23)
 
 
 Cognitive_Slope<-noquote(Cognitive_Slope)
-
-r<-movenetw(studyplot=Area_of_interest, origin=Origin, funct=Function, move=Move, cogn.slp=Cognitive_Slope, sl.crit=Critical_Slope, W=Walker_Body_Weight, L=Carried_Load_Weight, N=N, V=Speed, z=Zoom_Level, lcp.dens=LCP_DENS, oneplot=FALSE, export=FALSE)
+LCP_DENS<-noquote(LCP_DENS)
+r<-movenetw(studyplot=Area_of_interest, origin=Origin,  move=Move, funct=Function, cogn.slp=Cognitive_Slope, sl.crit=Critical_Slope, W=Walker_Body_Weight, L=Carried_Load_Weight, N=N, V=Speed, z=Zoom_Level, lcp.dens=LCP_DENS, oneplot=FALSE, export=FALSE)
 
 
 
@@ -96,9 +96,10 @@ Output_DTM=dtm.sp
 
 
 
-#a1.sp<-as(r$LCPs.netw, "SpatialLinesDataFrame")
-#Output_LCPs_netw=a1.sp
-#raster.sp <- as(r$LCPs.density.count, "SpatialPixelsDataFrame") 
-#Output_LCPs_density_count=raster.sp
+a1<-r$LCPs.netw
+for (i in r$LCPs.netw){Output_LCPs_netw=i}
+
+raster.sp <- as(r$LCPs.density.count, "SpatialPixelsDataFrame") 
+Output_LCPs_density_count=raster.sp
 raster2.sp <- as(r$LCPs.density.perc, "SpatialPixelsDataFrame") 
 Output_LCPs_density_perc=raster2.sp

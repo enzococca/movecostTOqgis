@@ -182,11 +182,11 @@ Cognitive_Slope<-noquote(Cognitive_Slope)
 
 
 	
-if(Choice3==0)
-r<-movecomp(dtm=DTM, origin=Origin, destin=Destination, choice=c(Choice1,Choice2), move=Move, return.base=Return_Base, cogn.slp=Cognitive_Slope, sl.crit=Critical_Slope, W=Walker_Body_Weight, L=Carried_Load_Weight, N=N, V=Speed, z=Zoom_Level, oneplot=FALSE, export=FALSE)
-if(Choice3!=0)
-r<-movecomp(dtm=DTM, origin=Origin, destin=Destination, choice=c(Choice1,Choice2,Choice3), move=Move, return.base=Return_Base, cogn.slp=Cognitive_Slope, sl.crit=Critical_Slope, W=Walker_Body_Weight, L=Carried_Load_Weight, N=N, V=Speed, z=Zoom_Level, oneplot=FALSE, export=FALSE)
-
+tryCatch({
+r<-movecomp(dtm=DTM, origin=Origin, destin=Destination, choice=c(Choice1,Choice2),  move=Move, return.base=Return_Base, cogn.slp=Cognitive_Slope, sl.crit=Critical_Slope, W=Walker_Body_Weight, L=Carried_Load_Weight, N=N, V=Speed, z=Zoom_Level, oneplot=FALSE, export=FALSE)
+},
+    error = function(e) {str(e) 
+r<-movecomp(dtm=DTM,origin=Origin, destin=Destination, choice=c(Choice1,Choice2,Choice3), move=Move, return.base=Return_Base, cogn.slp=Cognitive_Slope, sl.crit=Critical_Slope, W=Walker_Body_Weight, L=Carried_Load_Weight, N=N, V=Speed, z=Zoom_Level, oneplot=FALSE, export=FALSE)})
 b1.sp<-as(r$LCPs, "SpatialLinesDataFrame")
 Output_LCP=b1.sp
 

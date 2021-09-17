@@ -79,7 +79,7 @@ if(Function==23)
 
 
 Cognitive_Slope<-noquote(Cognitive_Slope)
-
+LCP_DENS<-noquote(LCP_DENS)
 r<-movenetw(dtm=DTM, origin=Origin, funct=Function, move=Move, cogn.slp=Cognitive_Slope, sl.crit=Critical_Slope, W=Walker_Body_Weight, L=Carried_Load_Weight, N=N, V=Speed, z=Zoom_Level, lcp.dens=LCP_DENS, oneplot=FALSE, export=FALSE)
 
 raster.sp <- as(r$LCPs.density.count, "SpatialPixelsDataFrame") 
@@ -88,8 +88,8 @@ Output_LCPs_density_count=raster.sp
 raster2.sp <- as(r$LCPs.density.perc, "SpatialPixelsDataFrame") 
 Output_LCPs_density_perc=raster2.sp
 
-a1.sp<-as(r$LCPs.netw, "SpatialLinesDataFrame")
-Output_LCPs_netw=a1.sp
+a1<-r$LCPs.netw
+for (i in r$LCPs.netw){Output_LCPs_netw=i}
 
 b1.sp<-as(r$LCPs.netw.merged, "SpatialLinesDataFrame")
 Output_LCPs_netw_merged=b1.sp
