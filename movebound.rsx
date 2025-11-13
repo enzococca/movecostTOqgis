@@ -17,10 +17,9 @@
 ##Zoom_Level=number 9
 ##Output_Isoline=output vector
 ##showplots
-install.packages("movecost")
-
-
-
+if (!requireNamespace("movecost", quietly = TRUE)) {
+  install.packages("movecost")
+}
 library(sp)
 library(movecost)
 
@@ -60,20 +59,18 @@ if(Function==14)
 if(Function==15)
 	Function=c("b")
 if(Function==16)
-	Function=c("b")
-if(Function==17)
 	Function=c("p")
+if(Function==17)
+	Function=c("pcf")
 if(Function==18)
-	Function=c("pcf")	
+	Function=c("m")
 if(Function==19)
-	Function=c("m")		
+	Function=c("hrz")
 if(Function==20)
-	Function=c("hrz")	
+	Function=c("vl")
 if(Function==21)
-	Function=c("vl")	
+	Function=c("ls")
 if(Function==22)
-	Function=c("ls")	
-if(Function==23)
 	Function=c("a")		
 if(Time==0)
 	Time=c("h")

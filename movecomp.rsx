@@ -21,7 +21,9 @@
 ##Output_LCP_Back=output vector
 
 ##showplots
-install.packages("movecost")
+if (!requireNamespace("movecost", quietly = TRUE)) {
+  install.packages("movecost")
+}
 library(sp)
 library(movecost)
 library(raster)
@@ -190,6 +192,6 @@ r<-movecomp(dtm=DTM,origin=Origin, destin=Destination, choice=c(Choice1,Choice2,
 b1.sp<-as(r$LCPs, "SpatialLinesDataFrame")
 Output_LCP=b1.sp
 
-if(Return_Base==TRUE){lback.sp<-as(r$LPCs.back, "SpatialLinesDataFrame")	
+if(Return_Base==TRUE){lback.sp<-as(r$LCPs.back, "SpatialLinesDataFrame")
 Output_LCP_Back=lback.sp}
 
