@@ -24,7 +24,9 @@
 
 
 ##showplots
-install.packages("movecost")
+if (!requireNamespace("movecost", quietly = TRUE)) {
+  install.packages("movecost")
+}
 library(sp)
 library(movecost)
 library(raster)
@@ -201,5 +203,5 @@ raster2.sp <- as(r$dtm, "SpatialPixelsDataFrame")
 ras2 <- crop(raster2.sp, Area_of_interest)
 Output_DTM=ras2
 
-if(Return_Base==TRUE){lback.sp<-as(r$LPCs.back, "SpatialLinesDataFrame")	
+if(Return_Base==TRUE){lback.sp<-as(r$LCPs.back, "SpatialLinesDataFrame")
 Output_LCP_Back=lback.sp}

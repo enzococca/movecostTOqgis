@@ -19,7 +19,9 @@
 ##Output_Isoline=output vector
 ##Output_Polygon=output vector
 ##showplots
-install.packages("movecost")
+if (!requireNamespace("movecost", quietly = TRUE)) {
+  install.packages("movecost")
+}
 library(sp)
 library(movecost)
 library(raster)
@@ -57,20 +59,18 @@ if(Function==14)
 if(Function==15)
 	Function=c("b")
 if(Function==16)
-	Function=c("b")
-if(Function==17)
 	Function=c("p")
+if(Function==17)
+	Function=c("pcf")
 if(Function==18)
-	Function=c("pcf")	
+	Function=c("m")
 if(Function==19)
-	Function=c("m")		
+	Function=c("hrz")
 if(Function==20)
-	Function=c("hrz")	
+	Function=c("vl")
 if(Function==21)
-	Function=c("vl")	
+	Function=c("ls")
 if(Function==22)
-	Function=c("ls")	
-if(Function==23)
 	Function=c("a")		
 if(Time==0)
 	Time=c("h")
@@ -83,9 +83,9 @@ r<-movealloc(dtm=NULL, origin=Points, studyplot=Area_of_interest,funct=Function,
 raster2.sp <- as(r$dtm, "SpatialPixelsDataFrame") 
 lidar_chm_crop <- crop(raster2.sp, Area_of_interest)
 Output_DTM=lidar_chm_crop
-raster.sp <- as(r$cost.allocation.raster, "SpatialPixelsDataFrame") 
+raster.sp <- as(r$cost.allocation.raster, "SpatialPixelsDataFrame")
 lidar_chm_crop2 <- crop(raster.sp, Area_of_interest)
-Output_Alloc_Raster=raster.sp
+Output_Alloc_Raster=lidar_chm_crop2
 a1.sp<-as(r$isolines, "SpatialLinesDataFrame")
 Output_Isoline=a1.sp
 a2.sp<-as(r$alloc.boundaries, "SpatialPolygonsDataFrame")
