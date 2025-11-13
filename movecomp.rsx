@@ -62,20 +62,18 @@ if(Choice1==14)
 if(Choice1==15)
 	Choice1="b"
 if(Choice1==16)
-	Choice1="b"
-if(Choice1==17)
 	Choice1="p"
+if(Choice1==17)
+	Choice1="pcf"
 if(Choice1==18)
-	Choice1="pcf"	
+	Choice1="m"
 if(Choice1==19)
-	Choice1="m"		
+	Choice1="hrz"
 if(Choice1==20)
-	Choice1="hrz"	
+	Choice1="vl"
 if(Choice1==21)
-	Choice1="vl"	
+	Choice1="ls"
 if(Choice1==22)
-	Choice1="ls"	
-if(Choice1==23)
 	Choice1="a"	
 	
 	
@@ -112,20 +110,18 @@ if(Choice2==14)
 if(Choice2==15)
 	Choice2="b"
 if(Choice2==16)
-	Choice2="b"
-if(Choice2==17)
 	Choice2="p"
+if(Choice2==17)
+	Choice2="pcf"
 if(Choice2==18)
-	Choice2="pcf"	
+	Choice2="m"
 if(Choice2==19)
-	Choice2="m"		
+	Choice2="hrz"
 if(Choice2==20)
-	Choice2="hrz"	
+	Choice2="vl"
 if(Choice2==21)
-	Choice2="vl"	
+	Choice2="ls"
 if(Choice2==22)
-	Choice2="ls"	
-if(Choice2==23)
 	Choice2="a"	
 
 if(Choice3==0)
@@ -163,20 +159,18 @@ if(Choice3==15)
 if(Choice3==16)
 	Choice3="b"
 if(Choice3==17)
-	Choice3="b"
-if(Choice3==18)
 	Choice3="p"
+if(Choice3==18)
+	Choice3="pcf"
 if(Choice3==19)
-	Choice3="pcf"	
+	Choice3="m"
 if(Choice3==20)
-	Choice3="m"		
+	Choice3="hrz"
 if(Choice3==21)
-	Choice3="hrz"	
+	Choice3="vl"
 if(Choice3==22)
-	Choice3="vl"	
+	Choice3="ls"
 if(Choice3==23)
-	Choice3="ls"	
-if(Choice3==24)
 	Choice3="a"	
 	
 Return_Base<-noquote(Return_Base)	
